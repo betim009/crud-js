@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
 
+    <!-- Campos de entrada para o título e o corpo do post -->
     <input type="text" id="title" placeholder="title">
     <input type="text" id="body" placeholder="body">
 
+    <!-- Botão que aciona a função de cadastrar o post -->
     <button onclick="handleClick()">Cadastrar</button>
 
     <script>
+        // Função assíncrona que será chamada quando o botão for clicado
         async function handleClick() {
-            const title = document.getElementById('title').value;
-            const body = document.getElementById('body').value;
+            // 1. Coletar os dados digitados pelo usuário
+            const title = document.getElementById('title').value;  // Obtém o valor do campo "title"
+            const body = document.getElementById('body').value;    // Obtém o valor do campo "body"
 
-            const url = 'https://jsonplaceholder.typicode.com/posts'
-            const headers =  {
-                method: 'POST',
+            // 2. Definir a URL da API que receberá o post
+            const url = 'https://jsonplaceholder.typicode.com/posts';
+
+            // 3. Configurar os headers e o corpo da requisição
+            const headers = {
+                method: 'POST', // Método HTTP POST para enviar dados
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json' // Informar que o conteúdo é JSON
                 },
-                body: JSON.stringify({
-                    title: title,
-                    body: body,
-                    userId: 1
+                body: JSON.stringify({  // Converte os dados do post em formato JSON
+                    title: title,  // Define o título no corpo do post
+                    body: body,    // Define o corpo do post
+                    userId: 1      // Inclui o ID do usuário (fixo nesse caso)
                 })
             }
 
-            const req = await fetch(url, headers);
-            const res = await req.json();
+            // 4. Fazer a requisição POST usando fetch
+            const req = await fetch(url, headers); // Envia a requisição e aguarda a resposta
 
-            console.log(res);
+            // 5. Convertendo a resposta para JSON
+            const res = await req.json(); // Extrai o JSON da resposta
+
+            // 6. Exibir o resultado da requisição no console
+            console.log(res); // Mostra o post criado no console
         }
     </script>
 
 </body>
+
 </html>

@@ -1,35 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get - JS</title>
 </head>
+
 <body>
 
+    <!-- Div onde os resultados da API serão exibidos -->
     <div id="resultado">
-
     </div>
-    
-
 
     <script>
+        // Obtém a div onde os resultados serão inseridos
         const resultado = document.getElementById("resultado");
 
+        // Função assíncrona para fazer a requisição GET na API
         async function getApi() {
+            // 1. Fazer a requisição para a API
             const req = await fetch("https://jsonplaceholder.typicode.com/posts");
+
+            // 2. Converter a resposta da API para JSON
             const res = await req.json();
+
+            // 3. Exibir os dados no console (apenas para verificação)
             console.log(res);
-            for(const item of res){
+
+            // 4. Percorrer o array de posts retornado pela API
+            for (const item of res) {
+                // 5. Adicionar o título e o corpo de cada post à div "resultado"
                 resultado.innerHTML += `
-                    <h3>${item.title}</h3>
-                    <p>${item.body}</p>
-                `
+                    <h3>${item.title}</h3>  <!-- Exibe o título do post -->
+                    <p>${item.body}</p>    <!-- Exibe o corpo do post -->
+                `;
             }
-        };
+        }
 
-
+        // Chamar a função para obter os dados da API quando a página carregar
         getApi();
     </script>
 </body>
+
 </html>
