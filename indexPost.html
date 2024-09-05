@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="title" placeholder="title">
+    <input type="text" id="body" placeholder="body">
+
+    <button onclick="handleClick()">Cadastrar</button>
+
+    <script>
+        async function handleClick() {
+            const title = document.getElementById('title').value;
+            const body = document.getElementById('body').value;
+
+            const url = 'https://jsonplaceholder.typicode.com/posts'
+            const headers =  {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    body: body,
+                    userId: 1
+                })
+            }
+
+            const req = await fetch(url, headers);
+            const res = await req.json();
+
+            console.log(res);
+        }
+    </script>
+
+</body>
+</html>
